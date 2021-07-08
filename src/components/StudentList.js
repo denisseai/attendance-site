@@ -5,12 +5,18 @@ import PropTypes from 'prop-types';
 
 const StudentList = (props) => {
 
-  const headingClass = 'student-list__heading green-bg';
+  const headingClass = 'student-list-heading';
   const listClass = 'student-list';
 
   const studentComponents = props.students.map(student => {
     return (<li>
-        <Student key={student.nameData} name={student.nameData} email={student.emailData}></Student>
+        <Student key={student.id} 
+                 id={student.id}
+                 name={student.nameData}
+                 email={student.emailData}
+                 isPresent={student.isPresentData}
+                 onUpdate={props.onUpdateStudent}
+        />
         </li>
     );
 });
@@ -28,9 +34,12 @@ const StudentList = (props) => {
 
 StudentList.propTypes = {
   students: PropTypes.arrayOf(PropTypes.shape({
-      nameData: PropTypes.string.isRequired,
-      emailData: PropTypes.string.isRequired
-  }))
+    id: PropTypes.number.isRequired,
+    nameData: PropTypes.string.isRequired,
+    emailData: PropTypes.string.isRequired,
+    isPresentData: PropTypes.bool
+  })),
+  onUpdateStudent: PropTypes.func.isRequired
 };
 
 

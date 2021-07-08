@@ -1,12 +1,8 @@
-.student-list__heading {
+.student-list_-heading {
   color: darkblue;
-  font-style: oblique;
+  /* font-style: oblique; */
 }
 
 .student-list {
   list-style-type: square;
-}
-
-.green-bg {
-  color: green;
 }

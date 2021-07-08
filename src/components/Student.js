@@ -1,15 +1,22 @@
 import './Student.css';
 import PropTypes from 'prop-types'
-import  React , { useState } from 'react';
+import  React from 'react';
 
 const Student = (props) => {
-    const [isPresent, setIsPresent] = useState(false);
 
-    const togglePresence = () => {
-        setIsPresent(!isPresent);
+    const onAttendanceButtonClick = () => {
+        const updatedStudent = {
+            id: props.id,
+            nameData: props.name,
+            emailData: props.email,
+            isPresentData: !props.isPresent
+        };
+        // Invoke the function passed in through the prop named "onUpdate"
+        // This function is referenced by the name "updateStudentData" in App
+        props.onUpdate(updatedStudent);
     };
 
-    const nameColor = isPresent ? 'green' : 'red';
+    const nameColor = props.isPresent ? 'green' : 'red';
 
     return (
         <section>
@@ -17,14 +24,17 @@ const Student = (props) => {
                 <li className={nameColor}>Nickname: {props.name}</li>
                 <li>Email: {props.email}</li>
             </ul>
-            <button onClick={togglePresence}>Toggle if {props.name} is present</button>
+            <button onClick={onAttendanceButtonClick}>Toggle if {props.name} is present</button>
         </section>
     );
 };
 
 Student.propTypes = {
+    id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
     email: PropTypes.string.isRequired,
+    isPresent: PropTypes.bool,
+    onUpdate: PropTypes.func.isRequired
   };
 
 export default Student;
